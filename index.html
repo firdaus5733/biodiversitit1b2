@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Interaktif Biodiversiti T2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide-static/0.321.0/lucide.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #10b981;
+            border-radius: 10px;
+        }
+        
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        th:first-child { border-top-left-radius: 1rem; }
+        th:last-child { border-top-right-radius: 1rem; }
+    </style>
+</head>
+<body class="bg-emerald-50/30 text-slate-900 pb-20">
+
+    <!-- Navigation -->
+    <nav class="bg-emerald-800 text-white p-4 shadow-xl sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3 font-black text-2xl tracking-tight">
+                <div class="bg-white p-1 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-700"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8a7 7 0 0 1-10 10Z"/><path d="M11 20a7 7 0 0 0-10-10"/></svg>
+                </div>
+                <span class="hidden sm:inline uppercase">Biodiversiti T2</span>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="showSection('notes')" id="nav-notes" class="flex items-center gap-2 px-5 py-2 rounded-xl font-bold transition bg-white text-emerald-800">
+                    <span>Nota</span>
+                </button>
+                <button onclick="startQuiz()" id="nav-quiz" class="flex items-center gap-2 px-5 py-2 rounded-xl font-bold transition bg-emerald-600 hover:bg-emerald-500 text-white shadow-md">
+                    <span>Mula Kuiz</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" class="max-w-5xl mx-auto p-4 md:p-8">
+        <!-- Section: Nota -->
+        <div id="notes-section" class="space-y-12 animate-fade-in">
+            <!-- Pengenalan -->
+            <section class="bg-white rounded-[2.5rem] shadow-xl border border-emerald-100 overflow-hidden">
+                <div class="p-8 md:p-12">
+                    <div class="inline-block px-4 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-black mb-4 uppercase tracking-widest">Pengenalan</div>
+                    <h1 class="text-4xl md:text-5xl font-black text-emerald-900 mb-6 leading-tight">Apa itu <span class="text-emerald-600">Biodiversiti?</span></h1>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4 text-xl text-slate-700 font-medium">
+                            <p>Kepelbagaian organisma (mikroorganisma, haiwan, tumbuhan) yang hidup di habitat dan ekosistem yang berbeza.</p>
+                            <div class="bg-emerald-50 p-6 rounded-2xl border-2 border-emerald-100 flex items-start gap-4 text-base">
+                                <div class="bg-emerald-600 p-2 rounded-lg text-white">📍</div>
+                                <div>
+                                    <h4 class="font-bold text-emerald-800">Bagaimana ia wujud?</h4>
+                                    <p class="text-sm text-slate-600">Hasil daripada kepelbagaian habitat dan cuaca yang ekstrem atau berbeza di seluruh dunia.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-3xl overflow-hidden aspect-video relative shadow-xl border-4 border-white bg-slate-100" id="img-forest"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jadual Perbandingan Alam -->
+            <section class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black text-slate-800">Perbezaan Antara Alam (Kingdom)</h2>
+                    <p class="text-slate-500">Bagaimana membedakan antara Tumbuhan, Haiwan dan Fungi?</p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-emerald-800 text-white">
+                                <th class="p-4 font-black">Ciri</th>
+                                <th class="p-4 font-black">Tumbuhan</th>
+                                <th class="p-4 font-black">Haiwan</th>
+                                <th class="p-4 font-black">Fungi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="border-b">
+                                <td class="p-4 font-bold bg-slate-50">Sumber Makanan</td>
+                                <td class="p-4 italic">Autotrof (Fotosintesis)</td>
+                                <td class="p-4 italic">Heterotrof (Makan organisma lain)</td>
+                                <td class="p-4 italic">Saprofit/Parasit (Serap nutrien)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-4 font-bold bg-slate-50">Dinding Sel</td>
+                                <td class="p-4">Ada (Selulosa)</td>
+                                <td class="p-4">Tiada</td>
+                                <td class="p-4">Ada (Kitin)</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-4 font-bold bg-slate-50">Pergerakan</td>
+                                <td class="p-4">Terhad / Statik</td>
+                                <td class="p-4">Bebas bergerak</td>
+                                <td class="p-4">Terhad</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Pengkelasan Haiwan -->
+            <section class="space-y-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-black text-slate-800">Pengkelasan Haiwan</h2>
+                    <div class="w-20 h-1.5 bg-emerald-500 mx-auto mt-2 rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Invertebrata -->
+                    <div class="bg-white p-8 rounded-[2.5rem] shadow-lg border-t-8 border-slate-300">
+                        <h3 class="text-2xl font-black mb-4 text-slate-700">Invertebrata</h3>
+                        <p class="text-slate-600 mb-4">Haiwan yang <strong>tidak mempunyai</strong> tulang belakang.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <span class="bg-slate-200 p-1 rounded">🐜</span>
+                                <div><span class="font-bold">Tanpa Kaki:</span> Contoh: Cacing tanah, lintah.</div>
+                            </li>
+                            <li class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <span class="bg-slate-200 p-1 rounded">🦀</span>
+                                <div><span class="font-bold">Berkaki:</span> Contoh: Semut, labah-labah, udang.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Vertebrata -->
+                    <div class="bg-white p-8 rounded-[2.5rem] shadow-lg border-t-8 border-emerald-500">
+                        <h3 class="text-2xl font-black mb-4 text-emerald-800">Vertebrata</h3>
+                        <p class="text-slate-600 mb-4">Haiwan yang <strong>mempunyai</strong> tulang belakang.</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs font-bold text-center">
+                            <div class="p-2 bg-emerald-50 rounded-lg text-emerald-700 uppercase">Ikan</div>
+                            <div class="p-2 bg-emerald-50 rounded-lg text-emerald-700 uppercase">Amfibia</div>
+                            <div class="p-2 bg-emerald-50 rounded-lg text-emerald-700 uppercase">Reptilia</div>
+                            <div class="p-2 bg-emerald-50 rounded-lg text-emerald-700 uppercase">Burung</div>
+                            <div class="p-2 bg-emerald-500 rounded-lg text-white uppercase col-span-2">Mamalia</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jadual Perbandingan Vertebrata -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-100">
+                    <h3 class="text-xl font-black mb-6 text-center text-slate-800">Ciri-Ciri Kumpulan Vertebrata</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="bg-emerald-100 text-emerald-900">
+                                    <th class="p-3">Ciri</th>
+                                    <th class="p-3">Ikan</th>
+                                    <th class="p-3">Amfibia</th>
+                                    <th class="p-3">Reptilia</th>
+                                    <th class="p-3">Burung</th>
+                                    <th class="p-3">Mamalia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-3 font-bold bg-slate-50">Suhu Badan</td>
+                                    <td class="p-3">Poikilotera</td>
+                                    <td class="p-3">Poikilotera</td>
+                                    <td class="p-3">Poikilotera</td>
+                                    <td class="p-3">Homoiotera</td>
+                                    <td class="p-3">Homoiotera</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-bold bg-slate-50">Litupan Badan</td>
+                                    <td class="p-3">Sisik lendir</td>
+                                    <td class="p-3">Kulit lembap</td>
+                                    <td class="p-3">Sisik kering</td>
+                                    <td class="p-3">Bulu pelepah</td>
+                                    <td class="p-3">Bulu / Rambut</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-bold bg-slate-50">Pernafasan</td>
+                                    <td class="p-3">Insang</td>
+                                    <td class="p-3">Peparu / Kulit</td>
+                                    <td class="p-3">Peparu</td>
+                                    <td class="p-3">Peparu</td>
+                                    <td class="p-3">Peparu</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-bold bg-slate-50">Pembiakan</td>
+                                    <td class="p-3">Telur (Luar)</td>
+                                    <td class="p-3">Telur (Luar)</td>
+                                    <td class="p-3">Telur (Dalam)</td>
+                                    <td class="p-3">Telur (Dalam)</td>
+                                    <td class="p-3">Beranak*</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-2">*Kecuali Ornitinkus (bertelur)</p>
+                </div>
+            </section>
+
+            <!-- Pengkelasan Tumbuhan -->
+            <section class="space-y-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-black text-slate-800">Pengkelasan Tumbuhan</h2>
+                    <div class="w-20 h-1.5 bg-emerald-500 mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Tidak Berbunga -->
+                    <div class="bg-slate-100 p-8 rounded-[2.5rem] border-2 border-slate-200">
+                        <h3 class="text-2xl font-black mb-4 text-slate-700">Tidak Berbunga</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-xl">🌿</div>
+                                <div>
+                                    <h4 class="font-bold">Lumut / Paku Pakis</h4>
+                                    <p class="text-xs text-slate-500">Membiak melalui spora.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-xl">🌲</div>
+                                <div>
+                                    <h4 class="font-bold">Konifer</h4>
+                                    <p class="text-xs text-slate-500">Membiak melalui kon.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Berbunga -->
+                    <div class="bg-emerald-900 p-8 rounded-[2.5rem] text-white">
+                        <h3 class="text-2xl font-black mb-4 text-emerald-100">Berbunga</h3>
+                        <p class="text-emerald-200 text-sm mb-6">Tumbuhan yang menghasilkan bunga yang kemudiannya menjadi buah dan biji benih.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-emerald-800 p-4 rounded-2xl border border-emerald-700">
+                                <h4 class="font-black text-emerald-300 mb-1">Monokotiledon</h4>
+                                <p class="text-[10px] opacity-70">Satu biji benih. Akar serabut.</p>
+                            </div>
+                            <div class="bg-emerald-800 p-4 rounded-2xl border border-emerald-700">
+                                <h4 class="font-black text-emerald-300 mb-1">Dikotiledon</h4>
+                                <p class="text-[10px] opacity-70">Dua biji benih. Akar tunjang.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perbezaan Mono vs Dicot UI -->
+                <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-emerald-50 p-6 rounded-[2rem] border-2 border-emerald-100">
+                            <h3 class="text-xl font-black mb-4 text-emerald-800 text-center">Monokotiledon</h3>
+                            <div class="rounded-2xl overflow-hidden aspect-video mb-4 bg-white" id="img-mono"></div>
+                            <ul class="text-sm space-y-1 font-medium text-slate-700">
+                                <li>✅ Satu kotiledon</li>
+                                <li>✅ Akar serabut</li>
+                                <li>✅ Daun urat selari</li>
+                            </ul>
+                        </div>
+                        <div class="bg-emerald-900 p-6 rounded-[2rem] text-white">
+                            <h3 class="text-xl font-black mb-4 text-emerald-100 text-center">Dikotiledon</h3>
+                            <div class="rounded-2xl overflow-hidden aspect-video mb-4 bg-emerald-800" id="img-dicot"></div>
+                            <ul class="text-sm space-y-1 text-emerald-50">
+                                <li>✅ Dua kotiledon</li>
+                                <li>✅ Akar tunjang</li>
+                                <li>✅ Daun urat jejala</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kepentingan -->
+            <section>
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black text-slate-800">Kenapa Kita Perlu Biodiversiti?</h2>
+                    <div class="w-20 h-1.5 bg-emerald-500 mx-auto mt-2 rounded-full"></div>
+                </div>
+                <div id="kepentingan-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </section>
+
+            <!-- Malaysia Mega -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <section class="bg-gradient-to-br from-emerald-700 to-emerald-900 text-white p-8 rounded-[2.5rem] shadow-2xl">
+                    <h3 class="text-2xl font-black mb-4 flex items-center gap-2">🌐 Malaysia: Negara Mega</h3>
+                    <p class="mb-6 opacity-90 leading-relaxed">Antara 12 negara terkaya di dunia! Kita mempunyai spesies <strong>Endemik</strong> yang wajib dipelihara.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="aspect-square bg-white/20 rounded-2xl mb-2 overflow-hidden border-2 border-white/10" id="img-rafflesia"></div>
+                            <span class="text-[10px] font-bold uppercase">Bunga Pakma</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="aspect-square bg-white/20 rounded-2xl mb-2 overflow-hidden border-2 border-white/10" id="img-orangutan"></div>
+                            <span class="text-[10px] font-bold uppercase">Orang Utan</span>
+                        </div>
+                    </div>
+                </section>
+                <section class="bg-rose-50 p-8 rounded-[2.5rem] border-2 border-rose-100 shadow-xl flex flex-col">
+                    <h3 class="text-2xl font-black mb-4 text-rose-800">⚠️ Kesan Aktiviti Manusia</h3>
+                    <div class="flex-1 rounded-2xl overflow-hidden mb-4 bg-white" id="img-deforest"></div>
+                    <p class="text-sm text-slate-600 italic">Pembalakan haram, pemburuan, dan pencemaran memusnahkan khazanah alam.</p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Section: Kuiz -->
+        <div id="quiz-section" class="hidden max-w-3xl mx-auto py-8 space-y-8 animate-fade-in">
+            <div id="quiz-header" class="bg-slate-900 text-white p-8 rounded-[2.5rem] shadow-2xl border border-emerald-500/30">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-3xl font-black uppercase tracking-tight">Kuiz Biodiversiti</h2>
+                    <span id="quiz-counter" class="bg-emerald-500 px-4 py-1 rounded-full text-xs font-black">0/50 SOALAN</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2 rounded-full">
+                    <div id="quiz-progress" class="bg-emerald-500 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div id="questions-container" class="space-y-6"></div>
+
+            <div id="quiz-footer" class="flex justify-center pt-10">
+                <button id="submit-btn" onclick="checkAnswers()" class="px-16 py-5 rounded-2xl font-black text-xl shadow-2xl bg-emerald-700 text-white hover:bg-emerald-800 transition transform active:scale-95">
+                    Semak Jawapan
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="hidden text-center py-20 animate-fade-in bg-white rounded-[4rem] shadow-2xl border border-emerald-100 px-8 max-w-3xl mx-auto">
+            <div id="result-icon" class="text-8xl mb-8">🏆</div>
+            <h1 id="result-title" class="text-5xl font-black text-emerald-900 mb-4 leading-tight">TAHNIAH!</h1>
+            <p id="result-score" class="text-2xl font-bold text-slate-600 mb-8">Skor anda: 100%</p>
+            <div class="flex justify-center gap-4">
+                <button onclick="showSection('notes')" class="bg-slate-100 text-slate-700 px-10 py-5 rounded-2xl font-black hover:bg-slate-200 transition">Lihat Nota</button>
+                <button onclick="startQuiz()" class="bg-emerald-600 text-white px-10 py-5 rounded-2xl font-black shadow-xl hover:bg-emerald-700 transition">Cuba Lagi</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const apiKey = "";
+
+        // Question Bank
+        const questionBank = {
+            low: [
+                { q: "Apakah definisi biodiversiti?", options: ["Kepelbagaian benda bukan hidup", "Kepelbagaian organisma hidup", "Kajian tentang tanah", "Proses awan"], correct: 1 },
+                { q: "Malaysia diiktiraf sebagai negara ___ Biodiversiti.", options: ["Kecil", "Sederhana", "Mega", "Mikro"], correct: 2 },
+                { q: "Haiwan yang bertulang belakang dipanggil...", options: ["Vertebrata", "Invertebrata", "Serangga", "Mikrob"], correct: 0 },
+                { q: "Haiwan tanpa tulang belakang dipanggil...", options: ["Vertebrata", "Invertebrata", "Mamalia", "Reptilia"], correct: 1 },
+                { q: "Antara berikut, yang manakah sumber makanan biodiversiti?", options: ["Pasir", "Ikan", "Kaca", "Plastik"], correct: 1 },
+                { q: "Contoh haiwan poikilotera (darah sejuk) ialah...", options: ["Kucing", "Burung", "Katak", "Manusia"], correct: 2 },
+                { q: "Ikan bernafas melalui...", options: ["Peparu", "Insang", "Kulit", "Trakea"], correct: 1 },
+                { q: "Tumbuhan yang mempunyai satu kotiledon ialah...", options: ["Monokotiledon", "Dikotiledon", "Konifer", "Paku pakis"], correct: 0 },
+                { q: "Bunga Pakma (Rafflesia) ialah tumbuhan endemik di...", options: ["Eropah", "Malaysia", "Amerika", "Afrika"], correct: 1 },
+                { q: "Haiwan manakah yang beranak?", options: ["Ayam", "Kucing", "Ikan Mas", "Kura-kura"], correct: 1 },
+                { q: "Habitat unta ialah di...", options: ["Hutan hujan", "Gurun", "Kutub", "Paya bakau"], correct: 1 },
+                { q: "Ular tergolong dalam kumpulan...", options: ["Amfibia", "Ikan", "Reptilia", "Mamalia"], correct: 2 },
+                { q: "Haiwan manakah mempunyai bulu pelepah?", options: ["Kucing", "Ayam", "Ular", "Katak"], correct: 1 },
+                { q: "Paku pakis membiak melalui...", options: ["Biji benih", "Spora", "Daun", "Keratan batang"], correct: 1 },
+                { q: "Contoh amfibia ialah...", options: ["Katak", "Ikan", "Buaya", "Burung"], correct: 0 },
+                { q: "Reptilia bernafas melalui...", options: ["Insang", "Peparu", "Kulit lembap", "Liang stoma"], correct: 1 },
+                { q: "Gajah mempunyai kulit berbulu...", options: ["Halus", "Pelepah", "Tebal", "Sangat Lebat"], correct: 0 },
+                { q: "Contoh monokotiledon ialah...", options: ["Jagung", "Durian", "Rambutan", "Mangga"], correct: 0 },
+                { q: "Akar monokotiledon jenis...", options: ["Tunjang", "Serabut", "Kayu", "Gantung"], correct: 1 },
+                { q: "Paus adalah seekor...", options: ["Ikan", "Mamalia", "Reptilia", "Amfibia"], correct: 1 },
+                { q: "Haiwan homoiotera bermaksud darah...", options: ["Sejuk", "Panas", "Biru", "Hijau"], correct: 1 },
+                { q: "Tumbuhan berbunga menghasilkan...", options: ["Spora", "Biji benih", "Kayu", "Pasir"], correct: 1 },
+                { q: "Burung mempunyai tulang yang...", options: ["Berat", "Berongga", "Sangat keras", "Tiada"], correct: 1 },
+                { q: "Invertebrata mempunyai kaki beruas atau...", options: ["Tanpa kaki", "Satu kaki", "Kaki kayu", "Kaki besi"], correct: 0 },
+                { q: "Keseimbangan alam bergantung kepada...", options: ["Pembalakan", "Biodiversiti", "Kilang", "Kenderaan"], correct: 1 }
+            ],
+            medium: [
+                { q: "Apakah fungsi kitar nutrien dalam ekosistem?", options: ["Menghasilkan oksigen", "Mengekalkan kesuburan tanah", "Meningkatkan suhu", "Membina bangunan"], correct: 1 },
+                { q: "Mengapa amfibia memerlukan kulit yang lembap?", options: ["Untuk berenang", "Untuk pertukaran gas", "Untuk perlindungan", "Untuk kecantikan"], correct: 1 },
+                { q: "Kajian bioteknologi sering menggunakan biodiversiti untuk...", options: ["Membina jalan", "Inovasi perubatan", "Menghasilkan plastik", "Melombong emas"], correct: 1 },
+                { q: "Ciri manakah yang membezakan reptilia daripada amfibia?", options: ["Bertelur", "Mempunyai peparu", "Mempunyai sisik kering", "Berdarah sejuk"], correct: 2 },
+                { q: "Apakah maksud spesies endemik?", options: ["Spesies yang banyak", "Spesies yang terancam", "Spesies yang hanya ada di satu tempat", "Spesies migrasi"], correct: 2 },
+                { q: "Tumbuhan dikotiledon mempunyai daun berurat...", options: ["Selari", "Jejala", "Lurus", "Tiada"], correct: 1 },
+                { q: "Fungsi pendebungaan oleh serangga membantu dalam...", options: ["Pencemaran", "Pembiakan tumbuhan", "Kebakaran hutan", "Hakisan tanah"], correct: 1 },
+                { q: "Bagaimanakah biodiversiti membantu ekonomi?", options: ["Melalui pelancongan", "Melalui pembakaran", "Melalui banjir", "Melalui sampah"], correct: 0 },
+                { q: "Pengurusan biodiversiti secara in-situ bermaksud...", options: ["Di zoo", "Di habitat asal", "Di muzium", "Di dalam makmal"], correct: 1 },
+                { q: "Pengurusan ex-situ pula bermaksud...", options: ["Di habitat asal", "Di luar habitat asal", "Di dalam gua", "Di dasar laut"], correct: 1 },
+                { q: "Lumut diklasifikasikan sebagai tumbuhan...", options: ["Berbunga", "Tidak berbunga", "Berduri", "Berbuah"], correct: 1 },
+                { q: "Ciri utama ikan pari ialah mempunyai badan...", options: ["Silinder", "Pipih", "Bulat", "Bersegi"], correct: 1 },
+                { q: "Burung Kelestari mempunyai pundi udara untuk...", options: ["Menyimpan air", "Meringankan badan semasa terbang", "Bercakap", "Makan"], correct: 1 },
+                { q: "Bahan mentah industri dari hutan ialah...", options: ["Petroleum", "Rotan", "Kaca", "Besi"], correct: 1 },
+                { q: "Spesies manakah tergolong dalam haiwan terancam?", options: ["Kucing", "Harimau Malaya", "Ayam", "Lembu"], correct: 1 }
+            ],
+            hard: [
+                { q: "Mengapakah Malaysia dipanggil antara 12 negara Mega Biodiversiti?", options: ["Kerana kaya dengan minyak", "Kerana kepadatan penduduk", "Kerana jumlah spesies yang sangat tinggi", "Kerana banyak bangunan"], correct: 2 },
+                { q: "Bagaimanakah peningkatan suhu global menjejaskan biodiversiti kutub?", options: ["Meningkatkan spesies", "Kemusnahan habitat akibat pencairan ais", "Ais menjadi lebih tebal", "Tiada kesan"], correct: 1 },
+                { q: "Analisis perbandingan antara monokotiledon dan dikotiledon menunjukkan perbezaan pada...", options: ["Warna bunga", "Sistem vaskular di dalam batang", "Ketinggian pokok", "Jumlah daun"], correct: 1 },
+                { q: "Kesan aktiviti antropogenik terhadap biodiversiti membawa kepada...", options: ["Kepupusan spesies", "Penciptaan spesies baru", "Hujan emas", "Keseimbangan"], correct: 0 },
+                { q: "Apakah peranan mikroorganisma dalam pemuliharaan biodiversiti?", options: ["Sebagai pemangsa", "Sebagai pengurai nutrien", "Sebagai pengeluar makanan", "Sebagai parasit kekal"], correct: 1 },
+                { q: "Interaksi antara spesies (simbiosis) penting untuk...", options: ["Persaingan mati", "Kestabilan komuniti biologi", "Menghapuskan hutan", "Mengawal cuaca"], correct: 1 },
+                { q: "Pengezonan hutan simpan merupakan strategi pemuliharaan...", options: ["Ex-situ", "In-situ", "Ab-initio", "Ad-hoc"], correct: 1 },
+                { q: "Mekanisme homeostasis pada mamalia membolehkan mereka...", options: ["Berubah warna", "Mengekalkan suhu badan stabil", "Bernafas dalam air", "Tiada tulang"], correct: 1 },
+                { q: "Pencemaran baja kimia (eutrofikasi) di tasik menyebabkan...", options: ["Ikan bertambah", "Kematian hidupan air akibat kurang oksigen", "Air menjadi jernih", "Pasir bertambah"], correct: 1 },
+                { q: "Bioteknologi membolehkan saintis memelihara baka spesies melalui...", options: ["Pembakaran", "Bank Genetik", "Muzium", "Gambar"], correct: 1 }
+            ]
+        };
+
+        let currentActiveQuestions = [];
+        let userAnswers = {};
+
+        // Sections Management
+        function showSection(id) {
+            document.getElementById('notes-section').classList.add('hidden');
+            document.getElementById('quiz-section').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            
+            document.getElementById(`${id}-section`).classList.remove('hidden');
+
+            document.getElementById('nav-notes').className = (id === 'notes') ? 'flex items-center gap-2 px-5 py-2 rounded-xl font-bold transition bg-white text-emerald-800' : 'flex items-center gap-2 px-5 py-2 rounded-xl font-bold transition hover:bg-emerald-700 text-emerald-100';
+            document.getElementById('nav-quiz').className = (id === 'quiz') ? 'flex items-center gap-2 px-5 py-2 rounded-xl font-bold transition bg-white text-emerald-800 shadow-inner' : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-md flex items-center gap-2 px-5 py-2 rounded-xl font-bold transition';
+        }
+
+        // AI Image Generation
+        async function fetchAIImage(containerId, prompt) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            container.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center gap-2 bg-slate-100 text-[10px] font-bold text-slate-400">
+                <div class="w-6 h-6 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+                MENJANA VISUAL...
+            </div>`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        instances: [{ prompt: `${prompt}, realistic education style, high detail` }],
+                        parameters: { sampleCount: 1 }
+                    })
+                });
+                
+                if (!response.ok) throw new Error();
+                const result = await response.json();
+                const base64 = result.predictions[0].bytesBase64Encoded;
+                container.innerHTML = `<img src="data:image/png;base64,${base64}" class="w-full h-full object-cover">`;
+            } catch (e) {
+                container.innerHTML = `<div class="w-full h-full flex items-center justify-center bg-rose-50 text-rose-300 text-[10px]">GAGAL DIMUAT</div>`;
+            }
+        }
+
+        // Initialize Notes UI
+        function initNotes() {
+            const grid = document.getElementById('kepentingan-grid');
+            const kepentingan = [
+                { icon: '🛒', title: 'Sumber Makanan', desc: 'Nutrisi harian dari tumbuhan & haiwan.', p: 'Fresh fruits and fish on a table' },
+                { icon: '🔄', title: 'Keseimbangan', desc: 'Kitar nutrien & pendebungaan.', p: 'Bee pollinating flower' },
+                { icon: '🩺', title: 'Perubatan', desc: 'Herba sebagai bahan aktif ubat.', p: 'Herbal medicine ginger turmeric' },
+                { icon: '💰', title: 'Ekonomi', desc: 'Pelancongan menjana pendapatan.', p: 'Tropical resort Malaysia' },
+                { icon: '🔨', title: 'Bahan Mentah', desc: 'Kayu & rotan untuk industri.', p: 'Rattan furniture' },
+                { icon: '🎓', title: 'Pendidikan', desc: 'Kajian inovasi masa hadapan.', p: 'Plant research lab' }
+            ];
+
+            grid.innerHTML = kepentingan.map((item, i) => `
+                <div class="bg-white rounded-[2rem] shadow-md border-b-8 border-slate-200 hover:border-emerald-500 hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col">
+                    <div class="h-40 w-full bg-slate-100 overflow-hidden" id="img-kep-${i}"></div>
+                    <div class="p-6">
+                        <div class="mb-4 p-3 inline-block rounded-2xl bg-slate-100">${item.icon}</div>
+                        <h3 class="text-xl font-black mb-2 text-slate-800">${item.title}</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Load Images
+            fetchAIImage('img-forest', 'Lush tropical rainforest biodiversity');
+            fetchAIImage('img-rafflesia', 'Rafflesia flower Borneo');
+            fetchAIImage('img-orangutan', 'Orangutan on tree');
+            fetchAIImage('img-deforest', 'Healthy forest vs deforested land');
+            fetchAIImage('img-mono', 'Corn plant anatomy leaf roots');
+            fetchAIImage('img-dicot', 'Hibiscus plant anatomy leaf roots');
+            kepentingan.forEach((item, i) => fetchAIImage(`img-kep-${i}`, item.p));
+        }
+
+        // Quiz Logic
+        function startQuiz() {
+            userAnswers = {};
+            currentActiveQuestions = [
+                ...questionBank.low,
+                ...questionBank.medium,
+                ...questionBank.hard
+            ];
+            
+            showSection('quiz');
+            renderQuestions();
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answered = Object.keys(userAnswers).length;
+            const total = currentActiveQuestions.length;
+            const pct = (answered / total) * 100;
+            const counter = document.getElementById('quiz-counter');
+            const progress = document.getElementById('quiz-progress');
+            if(counter) counter.innerText = `${answered}/${total} SOALAN`;
+            if(progress) progress.style.width = `${pct}%`;
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = currentActiveQuestions.map((q, idx) => `
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-lg border border-slate-100 animate-fade-in" style="animation-delay: ${idx * 0.05}s">
+                    <div class="flex justify-between mb-4">
+                        <span class="text-slate-300 font-bold text-sm">SOALAN #${idx + 1}</span>
+                        <span class="px-3 py-1 bg-slate-100 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-500">
+                            ${idx < 25 ? 'Aras Rendah' : (idx < 40 ? 'Aras Sederhana' : 'Aras Sukar')}
+                        </span>
+                    </div>
+                    <p class="text-lg font-bold mb-6 text-slate-800">${q.q}</p>
+                    <div class="grid gap-3">
+                        ${q.options.map((opt, i) => `
+                            <button onclick="pickAnswer(${idx}, ${i})" id="q-${idx}-opt-${i}" class="p-4 rounded-2xl text-left border-2 border-slate-50 bg-slate-50/50 hover:bg-emerald-50 hover:border-emerald-200 transition-all font-medium text-slate-700 flex items-center gap-4">
+                                <div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center font-black text-xs border border-slate-200">${String.fromCharCode(65 + i)}</div>
+                                <span>${opt}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function pickAnswer(qIdx, optIdx) {
+            userAnswers[qIdx] = optIdx;
+            
+            // UI Update
+            for(let i=0; i<4; i++) {
+                const btn = document.getElementById(`q-${qIdx}-opt-${i}`);
+                if(btn) btn.className = "p-4 rounded-2xl text-left border-2 border-slate-50 bg-slate-50/50 hover:bg-emerald-50 hover:border-emerald-200 transition-all font-medium text-slate-700 flex items-center gap-4";
+            }
+            const activeBtn = document.getElementById(`q-${qIdx}-opt-${optIdx}`);
+            if(activeBtn) activeBtn.className = "p-4 rounded-2xl text-left border-2 border-emerald-600 bg-emerald-50 shadow-md font-bold text-emerald-800 flex items-center gap-4";
+            
+            updateProgress();
+        }
+
+        function checkAnswers() {
+            const total = currentActiveQuestions.length;
+            const answered = Object.keys(userAnswers).length;
+
+            if (answered < total) {
+                alert(`Sila jawab semua soalan (${answered}/${total} selesai)`);
+                return;
+            }
+
+            let correctCount = 0;
+            currentActiveQuestions.forEach((q, i) => {
+                if (userAnswers[i] === q.correct) correctCount++;
+            });
+
+            const scorePct = Math.round((correctCount / total) * 100);
+            
+            showResult(scorePct);
+        }
+
+        function showResult(score) {
+            document.getElementById('quiz-section').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            
+            document.getElementById('result-score').innerText = `Skor anda: ${score}%`;
+            
+            const title = document.getElementById('result-title');
+            const icon = document.getElementById('result-icon');
+            
+            if (score === 100) {
+                title.innerText = "CEMERLANG!";
+                icon.innerText = "👑";
+            } else if (score >= 80) {
+                title.innerText = "TAHNIAH!";
+                icon.innerText = "🌟";
+            } else if (score >= 50) {
+                title.innerText = "BAGUS!";
+                icon.innerText = "👍";
+            } else {
+                title.innerText = "CUBA LAGI!";
+                icon.innerText = "💪";
+            }
+        }
+
+        // Boot
+        window.onload = () => {
+            initNotes();
+        };
+    </script>
+</body>
+</html>
